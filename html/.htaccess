@@ -1,0 +1,4 @@
+AuthType BASIC
+AuthName "Password Required"
+AuthUserFile /var/www/sitepassword
+Require valid-user

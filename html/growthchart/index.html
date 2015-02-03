@@ -1,0 +1,428 @@
+
+<!DOCTYPE html>
+<html lang="en" ng-app='growthChartApp'>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="shortcut icon" href="../../assets/ico/favicon.ico">
+
+    <title>Online Growth Charts</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="bootstrap-3.1.1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="font-awesome-4.1.0/css/font-awesome.min.css" rel="stylesheet"> 
+    <link href="css/ace.css" rel="stylesheet" >
+    <script type="text/javascript" src="libjs/angular.js"></script>
+    <script type="text/javascript" src="libjs/angular-route.js"></script>
+    <script  type="text/javascript" src="js/app.js"></script>
+    <script  type="text/javascript" src="js/controllers.js"></script>
+    <script  type="text/javascript" src="js/ogc.js"></script>
+
+    <!-- script type="text/javascript" src="js/angular.min.js"></script>
+    <script type="text/javascript" src="js/angular-resource.min.js"></script>    
+	<script src="http://code.highcharts.com/modules/exporting.js"></script>
+
+    <script type="text/javascript" src="js/public/hello.js"></script -->
+
+		<script type="text/javascript" src="js/jquery-1.10.2.js"></script>
+	<script type="text/javascript" src="js/highcharts.js"></script>
+	<script type="text/javascript" src="js/mycharts.js"></script>
+
+            <script src="http://code.highcharts.com/highcharts.js"></script>
+            <script src="http://code.highcharts.com/stock/modules/exporting.js"></script>
+	
+
+    <!-- Just for debugging purposes. Don't actually copy this line! -->
+    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- Custom styles for this template -->
+    <link href="css/carousel.css" rel="stylesheet">
+    <link href="css/datepicker3.css" rel="stylesheet">
+    <link href="css/template.css" rel="stylesheet">
+ </head>	
+
+ 
+<!-- NAVBAR
+================================================== -->
+<body onLoad="" ng-controller='NavBarCtrl'  >
+    
+	<div class="navbar-wrapper">
+	<div class="container" >
+		<div class="navbar-container" id="navbar-container">
+		<!--div class="  navbar-container navbar-inverse navbar-fixed-top" role="navigation" --> 
+
+			<button type="button" class="navbar-toggle menu-toggler pull-left" id="menu-toggler">
+				<span class="sr-only">Toggle sidebar</span>
+
+				<span class="icon-bar"></span>
+
+				<span class="icon-bar"></span>
+
+				<span class="icon-bar"></span>
+			</button>
+
+			 
+
+			<div class="navbar-buttons navbar-header pull-right" role="navigation">
+				<ul class="nav ace-nav">
+					<li class="green">
+						<a  href="#/infants">
+							<i class="fa fa-child fa-2x  "></i> 
+							<span class="user-info">
+								<big>Infants and Babies </big>
+								<small> 0 ~ 36 months</small>
+							</span>
+						</a>
+					</li>
+
+                                       /<li class="blue">
+						<a href="#/children">
+							<i class="fa fa-male fa-2x  "></i> 
+							<span class="user-info">
+								<big>Children  and Teens  </big>
+								<small> 2 ~ 20 years</small>
+							</span>
+						</a>
+					</li>
+
+					<li class="purple">
+						<a href="#">
+							<i class="ace-icon fa fa-envelope"></i>
+							<big> Contact  </big>
+						</a>
+
+					</li>
+
+					<li class="light-blue">
+						<a href="#">
+							<i class="ace-icon fa fa-user"></i>
+							<big> Sign Up  </big>
+						</a>
+
+					</li>
+
+					<li class="red">
+						<a  href="#">
+							<i class="ace-icon fa fa-lock"></i>
+							<big> Log In  </big>
+						</a>
+
+					</li>
+					
+					
+					<!-- li class="light-blue">
+						<a data-toggle="dropdown" href="#" class="dropdown-toggle">
+							<i class="ace-icon fa fa-user"></i>
+							<span class="user-info">
+								<small>sign up,</small>
+								Jason
+							</span>
+
+							<i class="ace-icon fa fa-caret-down"></i>
+						</a>
+
+						<ul class="user-menu dropdown-menu-right dropdown-menu dropdown-yellow dropdown-caret dropdown-close">
+							<li>
+								<a href="#">
+									<i class="ace-icon fa fa-cog"></i>
+									Settings
+								</a>
+							</li>
+
+							<li>
+								<a href="profile.html">
+									<i class="ace-icon fa fa-user"></i>
+									Profile
+								</a>
+							</li>
+
+							<li class="divider"></li>
+
+							<li>
+								<a href="#">
+									<i class="ace-icon fa fa-power-off"></i>
+									Logout
+								</a>
+							</li>
+						</ul>
+					</li-->
+				</ul>
+			</div>
+		</div><!-- /.navbar-container -->
+	</div>
+</div>
+	
+<!-- Carousel
+================================================== -->
+<div id="myCarousel" class="carousel slide" data-ride="carousel">
+  <!-- Indicators -->
+   
+	  <ol class="carousel-indicators" style="padding: 0px 20px 0px 20px;">
+		<li data-target="#myCarousel" data-slide-to="0" class="active pull-left"></li>
+		<li data-target="#myCarousel" data-slide-to="1" class="pull-left"></li>
+		<li data-target="#myCarousel" data-slide-to="2" class="pull-left"></li>
+	  </ol>
+   
+  <div class="carousel-inner">
+    <div class="item active">
+      <img src="images/091_500.JPG" class="img-responsive">
+      <div class="container">
+        <div class="carousel-caption">
+          <h1>Share Charts with Family!  </h1>
+           </div>
+      </div>
+    </div>
+    <div class="item">
+      <img src="images/124_500.JPG" class="img-responsive">
+      <div class="container">
+        <div class="carousel-caption">
+          <h1> Maintain Your Children's Growth Charts Online </h1>
+          
+        </div>
+      </div>
+    </div>
+    <div class="item">
+      <img src="images/216_500.JPG" class="img-responsive">
+      <div class="container">
+        <div class="carousel-caption">
+          <h1> Never Lose Your Records</h1>
+		  <p>Save the record to cloud
+		  </p>
+          
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Controls -->
+  <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+    <span class="icon-prev"></span>
+  </a>
+  <a class="right carousel-control" href="#myCarousel" data-slide="next">
+    <span class="icon-next"></span>
+  </a>  
+</div>
+<!-- /.carousel -->
+
+    
+ 
+
+  
+<div class="container ">
+	<div class="row">
+  
+  
+
+
+        <div class="col-sm-3 col-md-3">
+            <div class="panel-group" id="accordion">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a data-toggle="collapse" data-parent="#accordion" href="#collapseOne">
+							
+							<i class="fa fa-child"></i> Infant Products</a>
+                        </h4>
+                    </div>
+                    <div id="collapseOne" class="panel-collapse collapse in">
+                        <div class="panel-body">
+                            <table class="table">
+                                <tr>
+                                    <td>
+                                         <a href="#"> Baby & Toddler Toys </a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                         <a href="#"> Bathing & Skin Care </a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                          <a href="#"> Car Seats & Accessories </a>
+                                    </td>
+                                </tr>
+								 <tr>
+                                    <td>
+                                         <a href="#"> Diapering </a>
+                                    </td>
+                                </tr>
+								 <tr>
+                                    <td>
+                                        <a href="#"> Feeding </a>
+                                    </td>
+                                </tr>
+								 <tr>
+                                    <td>
+                                        <a href="#"> Gear </a>
+                                    </td>
+                                </tr>
+								 <tr>
+                                    <td>
+                                        <a href="#"> Gifts  </a>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td>
+                                         <a href="#"> Health & Baby Care </a> 
+                                        <span class="badge">42</span>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+                
+ 				<div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a   href="services.php"> <i class="fa fa-certificate"></i>  Services & Supplies </a>
+                        </h4>
+                    </div>                    
+                </div>
+
+				<div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a   href="literature.php"><i class="fa fa-book"></i>  Literature </a>
+                        </h4>
+                    </div>                    
+                </div>
+				
+				<div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a   href="purchase.php"><i class="fa fa-credit-card"></i> Purchase and Pay </a>
+                        </h4>
+                    </div>                    
+                </div>
+				
+				<div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a   href="business.php"><i class="fa fa-globe"></i>  Business </a>
+                        </h4>
+                    </div>                    
+                </div>
+								
+				
+				<div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a   href="account.php"><i class="fa fa-user"></i> My Account </a>
+                        </h4>
+                    </div>                    
+                </div>
+				
+				<div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h4 class="panel-title">
+                            <a   href="contact.php"><i class="fa fa-phone"></i>  Contact </a>
+                        </h4>
+                    </div>                    
+                </div>
+				                
+            </div>
+        </div>
+        
+
+	
+	 <div class="col-lg-6">     
+            <div class="container">     
+        		
+
+ 
+              <div ng-view></div> 
+	
+	
+                <div id="mychart1"  class="col-lg-9"></div>    
+	   
+	</div>
+</div>
+</div>
+</div>
+</div>
+		
+
+ 
+  
+   
+
+ 
+ 
+ 
+ 
+
+    
+
+      <hr class="featurette-divider">
+
+      <!-- /END THE FEATURETTES -->
+
+
+      <!-- FOOTER -->
+       
+ 
+		<div class="container light-black">
+			<div class="row">
+				<div class="col-lg-8">
+					
+					
+				   <p>
+					Copyright  &copy; 2014 OnlineGrowthCharts.com. All rights reserved. 
+					DISCLAIMER: All calculations must be confirmed before use. The authors make no 
+					claims of the accuracy of the information contained herein; and these suggested doses
+					are not a substitute for clinical judgement. Neither OnlineGrowthCharts.com 
+					nor any other party involved in the preparation or publication of this site 
+					shall be liable for any special, consequential, or exemplary damages resulting 
+					in whole or part from any user's use of or reliance upon this material.
+					</p>
+					<p>
+					Our Growth Percentile Calculator is a general educational tool only; 
+					it is not the last word on how your child is growing. This calculator is not a 
+					substitute for having a physician monitor your child's growth during regularly 
+					scheduled examinations. If you have any questions about your child's growth patterns, 
+					please ask your child's doctor.	
+					</p>
+					<p>
+					
+					These percentiles were compiled using the latest growth chart data from the National 
+					Center for Health Statistics, U.S. Public Health Service (released in November 2000).
+					The numbers are based on five health surveys done in the United States between 1963 
+					and 1994. The data takes into account the combined growth patterns of babies from all 
+					races and ethnicities and those who have been breast- and formula-fed.      
+					</p>
+ 						 
+				</div>
+				<div class="col-lg-4 text-right">
+					 
+						<p> </p>
+						<p> </p>
+						<p> </p>
+						<p></p>
+					 
+				</div>
+			</div>
+		</div>
+
+ 
+   </div> <!-- /.container -->
+
+
+    <!-- Bootstrap core JavaScript
+    ================================================== -->
+    <!-- Placed at the end of the document so the pages load faster -->
+     <script src="bootstrap-3.1.1/dist/js/bootstrap.min.js"></script>
+    <!-- script src="js/docs.min.js"></script>
+    <script src="js/bootstrap-datepicker.js"></script>
+    <script src="js/my.js"></script -->
+  </body>
+</html>

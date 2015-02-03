@@ -1,0 +1,169 @@
+<div id='infortForm'>
+<div class="row">
+    <div class="page-header col-lg-8">
+        <h1> Growth Charts for Infants <small> (birth to 36 months)</small></h1>
+                              
+    </div>
+</div>
+<form class="form-horizontal" role="form" ng-controller='infantCtrl'>
+
+    <div class="form-group">
+            <label for="inputUnit" class="col-sm-2 control-label">Unit</label>
+             <div class="col-sm-5" >
+               <div class="radio">
+                      <label>
+                            <input type="radio" name="unitRadios" id="unit_usstandard" value="US" ng-model='infantInfo.unitType'  onclick="customize_cookie('usstandard')" required >
+                            US/Standard (pounds, inches) 
+                      </label>
+                    </div>
+                    <div class="radio">
+                      <label>
+                            <input type="radio" ng-model='infantInfo.unitType' name="unitRadios" id="unit_metric" value="Metric" onclick="customize_cookie('metric')" required >
+                            Metric (kilograms, centimeter)
+                      </label>
+                    </div>		
+            </div>
+        </div>
+
+        <div class="form-group">
+                <label for="inputName" class="col-sm-2 control-label">Name</label>
+                <div class="col-sm-4 form-inline">
+                  <input type="text" size="20" ng-model='infantInfo.name'  class="form-control" id="name" placeholder="Name">
+                </div>
+        </div>
+
+        <div class="form-group" >
+                <label for="inputGender" class="col-sm-2 control-label">Gender</label>
+                <div class="col-sm-6" >
+                        <div class="radio">
+                          <label>
+                                <input type="radio" name="genderRadios" id="genderRadios1" ng-model='infantInfo.gender' value="1" required   >
+                                Boy
+                          </label>
+                        </div>
+                <div class="radio">
+                  <label>
+                        <input type="radio" name="genderRadios" id="genderRadios2" value="2" ng-model='infantInfo.gender' required >
+                        Girl
+                  </label>
+                </div>		
+        </div>
+        </div>
+
+        <div class="form-group">
+        <label for="inputBirthday" class="col-sm-2 control-label">Birthday</label>
+        <div class="col-sm-2 form-inline" id='sandbox-container'>		  
+                <div class="input-group date">
+                  <input  ng-model='infantInfo.dateBirth'  type="text" class="form-control" data-provide="datepicker" size="10" id="birthday" required >
+                  <span class="input-group-addon"><i class="fa fa-calendar"></i></span>
+                  
+                </div>
+        </div>
+        </div>
+
+
+        <div id='unitus'> 
+         <div class="form-group">
+                <label  class="col-sm-2 control-label">Weight</label>
+                <div class="col-sm-6  ">
+                        <div class="col-sm-6 input-group ">
+                                  <input type="number" class="form-control" id="weightlbs" ng-blur='setWeightUS()'  size="6" placeholder="lbs"  min="3" max="100" step="0.1"  > 
+                                  <span class="input-group-addon"> lbs </span>	 
+         
+                                  <input type="number" class="form-control" id="weightounce" ng-blur='setWeightUS()' size="6" placeholder="ounce"  min="0" max="15"   > 
+                                  <span class="input-group-addon"> ounce </span>	  
+                        </div>   		
+                 </div>     
+                  
+          </div>
+
+         <div class="form-group">
+                <label for="name" class="col-sm-2 control-label">Length </label>
+                <div class="col-sm-6  ">
+                <div class="col-sm-6 input-group">
+                  <input type="number" class="form-control" id="name" placeholder="Height" ng-model='infantInfo.heightInch'  min="10" max="100" step="0.1"  > 
+                  <span class="input-group-addon"> inch </span>	 
+                </div>
+                </div>
+          </div>
+         
+          <div class="form-group">
+                <label for="name" class="col-sm-2 control-label">Head Circumference </label>
+                <div class="col-sm-6  ">
+                <div class="col-sm-6 input-group">
+                  <input type="number" class="form-control" id="headcir" placeholder="Head Circumference" ng-model='infantInfo.hcInch'  min="3" max="100" step="0.1"   >
+                  <span class="input-group-addon"> inch </span>	 
+                </div>
+                </div>
+          </div>
+        </div>  
+
+
+        <div id='unitmetric'> 
+         <div class="form-group">
+                <label  class="col-sm-2 control-label">Weight</label>
+                <div class="col-sm-6  ">
+                        <div class="col-sm-6 input-group ">
+                                  <input type="number" class="form-control" id="weightlbs" size="6" placeholder="kg"  min="1" max="100" step="0.1"  > 
+                                  <span class="input-group-addon"> kg </span>	  
+                        </div>   		
+                 </div>     
+                  
+          </div>
+
+         <div class="form-group">
+                <label for="name" class="col-sm-2 control-label">Length </label>
+                <div class="col-sm-6  ">
+                <div class="col-sm-6 input-group">
+                  <input type="number" class="form-control" id="name" placeholder="Height"  min="40" max="250" step="1"  > 
+                  <span class="input-group-addon"> centimeter  </span>	 
+                </div>
+                </div>
+          </div>
+         
+          <div class="form-group">
+                <label for="name" class="col-sm-2 control-label">Head Circumference </label>
+                <div class="col-sm-6  ">
+                <div class="col-sm-6 input-group">
+                  <input type="number" class="form-control" id="headcir" placeholder="Head Circumference"  min="10" max="100" step="0.1"   > 
+                  <span class="input-group-addon"> centimeter  </span>	 
+                </div>
+                </div>
+          </div>
+        </div>  
+
+        <div class="form-group">
+                <div class="col-sm-offset-2 col-sm-4 center" >
+                  <button ng-click='showInfo()' type="submit" class="btn btn-primary"> <i class="fa fa-heart"></i> Get Charts</button>
+                </div>
+        </div>
+</form>
+</div>
+<div id="gcList">
+    <h3 class="header">
+       Infant Growth charts list</br>
+       <small>Including: Length, Weight, HeadCircle</small>
+    </h3>
+    <div id='listLayout' class="content">
+        <a href="">
+        <div class='listChart'>
+            <div id="container" style="width: 230px; height: 230px;"></div>
+            <div class='chartHover' style='opacity:0;'>
+                <span style='color:white;font-weight:bold;'>Click me</span>
+            </div>
+        </div>
+        </a>
+        <a href=''>
+        <div class='listChart'>
+        </div>
+        </a>
+        <a href=''>
+        <div class='listChart'>
+        </div>
+        </a>
+        <a>
+        <div style=''>
+        </div>
+        </a>
+    </div>
+</div>

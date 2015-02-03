@@ -1,0 +1,23 @@
+.header{
+    color:#333;
+    font-size:16px;
+    font-weight:600;
+    line-height:32px;
+    text-transform:uppercase;
+}
+#listLayout{
+    display:flex;
+    width:560px;
+    flex-wrap:wrap;
+}
+.chartHover:hover{
+    
+    background:#68b5ff;
+    opacity:1;
+}
+.listChart{
+    margin:10px;
+    width:230px;
+    height:300px;
+    border:1px solid #c3c3c3;
+}
