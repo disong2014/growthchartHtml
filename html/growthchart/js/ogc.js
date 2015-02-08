@@ -105,7 +105,8 @@ function getAge(formateType,fromdate,todate)
     }
     if(formateType === 'month')
     {
-        return (ydiff*12)+mdiff+(ddiff/getMonthDays(todate));
+      var actualMonth = (ydiff*12)+mdiff+(ddiff/getMonthDays(todate));  
+      return roundMonth(actualMonth);
     }else if(formateType ==='year')
     {
         return ydiff+(mdiff+(ddiff/getMonthDays(todate))/12);
@@ -120,4 +121,20 @@ function getMonthDays(curdate)
     var curtime = curdate.getTime();
     tmpdate.setMonth(tmpdate.getMonth()+1);
     return (tmpdate.getTime()-curtime)/(1000*3600*24);
+}
+// get routnMonth for example 12.23 should be round to 12
+// 12.65  should be round to 12.5
+function roundMonth(monthVal)
+{
+  var monthFloor = Math.floor(monthVal);
+  var midVal = monthFloor +0.5;
+  if(monthVal<midVal)
+  {
+    monthVal = (monthVal<=(monthFloor+0.25))? monthFloor:midVal; 
+  }
+  else
+  {
+    monthVal = (monthVal<=(midVal+0.25))? midVal: (mouthFloor+1);
+  }
+  return monthVal;
 }

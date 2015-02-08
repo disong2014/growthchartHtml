@@ -47,51 +47,60 @@ growthChartControllers.controller('infantCtrl',['$scope',function($scope){
             var p90 = [];
             var p95 = [];
             var p97 = [];
-            jQuery.get('../../resource/BMI_boy_2yr_20yrs.csv',function(data){
+            jQuery.get('../../resource/wtageinf.csv',function(data){
             
             var lines = data.split('\n');
             var i = 1;
             for(i; i<lines.length; i++){
-                    var items = lines[i].split(',');
-            
-                    p3.push([items[0]/12,parseFloat(items[1])]);		//p3
-                    p5.push([items[0]/12,parseFloat(items[2])]);		//p5
-                    p10.push([items[0]/12,parseFloat(items[3])]);		//p10
-                    p25.push([items[0]/12,parseFloat(items[4])]);		//p25
-                    p50.push([items[0]/12,parseFloat(items[5])]);		//p50
-                    p75.push([items[0]/12,parseFloat(items[6])]);		//p75
-                    p85.push([items[0]/12,parseFloat(items[7])]);		//p85
-                    p90.push([items[0]/12,parseFloat(items[8])]);		//p90
-                    p95.push([items[0]/12,parseFloat(items[9])]);		//p95
-                    p97.push([items[0]/12,parseFloat(items[10])]);		//p97
                     
+                    var items = lines[i].split(',');
+                    if(items[0] =='2')
+                    {
+                    p3.push([items[1],parseFloat(items[5])]);		//p3
+                    p5.push([items[1],parseFloat(items[6])]);		//p5
+                    p10.push([items[1],parseFloat(items[7])]);		//p10
+                    p25.push([items[1],parseFloat(items[8])]);		//p25
+                    p50.push([items[1],parseFloat(items[9])]);		//p50
+                    p75.push([items[1],parseFloat(items[10])]);		//p75
+                    p90.push([items[1],parseFloat(items[11])]);		//p90
+                    p95.push([items[1],parseFloat(items[12])]);		//p95
+                    p97.push([items[1],parseFloat(items[13])]);		//p97
+                    }
             }
               
             jQuery('#container').highcharts({
                     title: {
-                        text: 'Growth Chart',
-                        x: -20 //center
+                        text: 'Weight Chart',
+                        x: -20, //center,
+                        style:{"fontsize":"10px"}
                     },
                     subtitle: {
-                        text: 'Children',
+                        text: '0 to 36 months',
                         x: -20
                     },
                     tooltip: {
                      formatter : function(){
-                            return 'BMI:<b>'+this.y+'</b>, Age:<b>'+this.x+'</b>';
+                            return 'Weight:<b>'+this.y+'</b>, Age:<b>'+this.x+'</b>';
                     }   
                     },
                     yAxis : {
-                    title : {
-                    text : 'BMI'
-                    },
-                    tickInterval : 2,
-                    minorTickInterval: 1
+                      title : {
+                        text : 'Weight'
+                      },
+                      tickInterval : 2,
+                      minorTickInterval: 1
 
                     },
+                    plotOptions:{
+                      series:{
+                        marker:{
+                          enabled:false  
+                        }       
+                      }
+                    },
                     xAxis : {
-                    tickInterval : 2,
-                    minorTickInterval : 1
+                      tickInterval : 2,
+                      minorTickInterval : 1
                     },
                     legend: {
                         layout: 'vertical',
@@ -143,9 +152,12 @@ growthChartControllers.controller('infantCtrl',['$scope',function($scope){
                     },
                     {
                         type : 'scatter',
-                        data : [ [14,24.2],[16,25.5]],
+                        name : 'myChild',
+                        data : [ [$scope.infantInfo.age,$scope.infantInfo.weight]],
                          marker: {
-                                radius: 8
+                              fillColor:'#FF0000',
+                              enabled:true,
+                                radius: 4
                             }
                     
                     }
