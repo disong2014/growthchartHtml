@@ -53,3 +53,136 @@ jQuery(function () {
         }]
     });
 });
+
+function drawInfantChart(dataArray,chartConfig)
+{
+  
+    var age = [];
+    var p3 = [];
+    var p5 = [];
+    var p10 = [];
+    var p25 = [];
+    var p50 = [];
+    var p75 = [];
+    var p90 = [];
+    var p95 = [];
+    var p97 = [];
+    jQuery.get(chartConfig.sourcePath,function(data){
+    
+    var lines = data.split('\n');
+    var i = 1;
+    for(i; i<lines.length; i++){
+            
+            var items = lines[i].split(',');
+            if(items[0] == chartConfig.gender)
+            {
+            p3.push([items[1],parseFloat(items[5])]);		//p3
+            p5.push([items[1],parseFloat(items[6])]);		//p5
+            p10.push([items[1],parseFloat(items[7])]);		//p10
+            p25.push([items[1],parseFloat(items[8])]);		//p25
+            p50.push([items[1],parseFloat(items[9])]);		//p50
+            p75.push([items[1],parseFloat(items[10])]);		//p75
+            p90.push([items[1],parseFloat(items[11])]);		//p90
+            p95.push([items[1],parseFloat(items[12])]);		//p95
+            p97.push([items[1],parseFloat(items[13])]);		//p97
+            }
+    }
+      
+    jQuery('#'+chartConfig.divID).highcharts({
+            title: {
+                text: chartConfig.title,
+                x: -20, //center,
+                style:{"fontsize":"10px"}
+            },
+            subtitle: {
+                text: chartConfig.subTitle,
+                x: -20
+            },
+            tooltip: {
+              formatter : function(){
+                if(this.series.name == 'myChild')
+                {
+                  return 'Percentile:<b>'+chartConfig.percentile+'<b>';
+                }
+                else
+                    return chartConfig.toolTipX+'<b>'+this.y+'</b>, '+chartConfig.toolTipY+':<b>'+this.x+'</b>';
+            }   
+            },
+            yAxis : {
+              title : {
+                text : chartConfig.axisY
+              },
+              tickInterval : 2,
+              minorTickInterval: 1
+
+            },
+            plotOptions:{
+              series:{
+                marker:{
+                  enabled:false  
+                }       
+              }
+            },
+            xAxis : {
+              tickInterval : 2,
+              minorTickInterval : 1
+            },
+            legend: {
+                layout: 'vertical',
+                align: 'right',
+                verticalAlign: 'middle',
+                borderWidth: 0
+            },
+            
+            series: [
+            {
+                name : 'p3',
+                data : p3	
+            },
+            {
+                name : 'p5',
+                data : p5	
+            },
+            {
+                name : 'p10',
+                data : p10	
+            },
+            {
+                name : 'p25',
+                data : p25	
+            },
+            {
+                name : 'p50',
+                data : p50	
+            },
+            {
+                name : 'p75',
+                data : p75	
+            },
+            {
+                name : 'p90',
+                data : p90	
+            },
+            {
+                name : 'p95',
+                data : p95	
+            },
+            {
+                name : 'p97',
+                data : p97	
+            },
+            {
+                type : 'scatter',
+                name : 'myChild',
+                data : dataArray,
+                 marker: {
+                      fillColor:'#FF0000',
+                      enabled:true,
+                        radius: 4
+                    }
+            
+            }
+            ]
+        });
+    });
+}

@@ -7,7 +7,6 @@
 }
 #listLayout{
     display:flex;
-    width:560px;
     flex-wrap:wrap;
 }
 .chartHover:hover{
@@ -17,7 +16,11 @@
 }
 .listChart{
     margin:10px;
+    width:550px;
+    height:550px;
+    border:1px solid #c3c3c3;
+}
+.indiChart{
     width:500px;
     height:500px;
-    border:1px solid #c3c3c3;
 }
